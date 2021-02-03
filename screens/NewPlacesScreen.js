@@ -12,8 +12,11 @@ function NewPlacesScreen(props) {
   const [titleValue, setTitleValue] = useState('');
 
   const handleInputChange = (text) => {
-    console.log(text);
     setTitleValue(text);
+  };
+
+  const savePlace = () => {
+    console.log('place saved');
   };
 
   return (
@@ -25,7 +28,7 @@ function NewPlacesScreen(props) {
           onChangeText={handleInputChange}
           value={titleValue}
         />
-        <Button title="Add" />
+        <Button title="Add" onPress={savePlace} />
       </View>
     </ScrollView>
   );
