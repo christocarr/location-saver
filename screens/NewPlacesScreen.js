@@ -8,6 +8,9 @@ import {
   StyleSheet,
 } from 'react-native';
 
+import { useDispatch } from 'react-redux';
+import * as placesActions from '../store/places-actions';
+
 function NewPlacesScreen(props) {
   const [titleValue, setTitleValue] = useState('');
 
@@ -16,8 +19,11 @@ function NewPlacesScreen(props) {
   };
 
   const savePlace = () => {
-    console.log('place saved');
+    dispatch(placesActions.addPlace(titleValue));
+    props.navigation.goBack();
   };
+
+  const dispatch = useDispatch();
 
   return (
     <ScrollView>
