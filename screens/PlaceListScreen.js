@@ -2,32 +2,32 @@ import React from 'react';
 import { View, FlatList, Text, StyleSheet, Platform } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
+import { useSelector } from 'react-redux';
+import Place from '../components/Place';
 
 function PlaceListScreen(props) {
+  const places = useSelector((state) => state.places.places);
+
   return (
-    <View>
-      <View>
-        <Text onPress={() => props.navigation.navigate('Place Details Screen')}>
-          Place
-        </Text>
-      </View>
-    </View>
+    <FlatList
+      data={places}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <Place
+          image={null}
+          title={item.title}
+          address={null}
+          onSelect={() =>
+            props.navigation.navigate('Place Details Screen', {
+              placeTitle: item.title,
+              placeId: item.id,
+            })
+          }
+        />
+      )}
+    ></FlatList>
   );
 }
-
-// PlaceListScreen.navigationOptions = (navData) => {
-//   return {
-//     headerRight: (
-//       <HeaderButtons HeaderButtonComponent={HeaderButton}>
-//         <Item
-//           title="Add place"
-//           iconName={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
-//           onPress={() => navData.navigation.navigate('New Places Screen')}
-//         />
-//       </HeaderButtons>
-//     ),
-//   };
-// };
 
 const styles = StyleSheet.create({});
 
