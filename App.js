@@ -67,6 +67,9 @@ export default function App() {
           <Stack.Screen
             name="Place Details Screen"
             component={PlaceDetailsScreen}
+            options={({ route }) => ({
+              title: route.params.placeTitle,
+            })}
           />
         </Stack.Navigator>
       </NavigationContainer>
