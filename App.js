@@ -14,6 +14,16 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import PlacesReducer from './store/places-reducers';
+import { init } from './helper/db';
+
+init()
+  .then(() => {
+    console.log('initializing database');
+  })
+  .catch((err) => {
+    console.log('initializing database failed');
+    console.log(err);
+  });
 
 const roodReducer = combineReducers({
   places: PlacesReducer,
@@ -69,6 +79,7 @@ export default function App() {
             component={PlaceDetailsScreen}
             options={({ route }) => ({
               title: route.params.placeTitle,
+              headerTitle: route.params.placeTitle,
             })}
           />
         </Stack.Navigator>
