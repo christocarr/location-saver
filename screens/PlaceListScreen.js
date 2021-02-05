@@ -7,20 +7,20 @@ import Place from '../components/Place';
 
 function PlaceListScreen(props) {
   const places = useSelector((state) => state.places.places);
-
   return (
     <FlatList
       data={places}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <Place
-          image={null}
+          image={item.image}
           title={item.title}
           address={null}
           onSelect={() =>
             props.navigation.navigate('Place Details Screen', {
               placeTitle: item.title,
               placeId: item.id,
+              placeImg: item.image,
             })
           }
         />

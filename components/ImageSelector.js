@@ -4,7 +4,7 @@ import Colors from '../constants/Colors';
 import * as imagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 
-function ImageSelector() {
+function ImageSelector(props) {
   const [selectedImg, setSelectedImg] = useState();
 
   const verifyPermission = async () => {
@@ -33,6 +33,7 @@ function ImageSelector() {
     });
 
     setSelectedImg(image.uri);
+    props.takenImage(image.uri);
   };
 
   return (

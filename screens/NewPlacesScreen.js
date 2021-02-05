@@ -13,13 +13,18 @@ import * as placesActions from '../store/places-actions';
 
 function NewPlacesScreen(props) {
   const [titleValue, setTitleValue] = useState('');
+  const [image, setImage] = useState(null);
 
   const handleInputChange = (text) => {
     setTitleValue(text);
   };
 
+  const handleSelectedImage = (selectedImage) => {
+    setImage(selectedImage);
+  };
+
   const savePlace = () => {
-    dispatch(placesActions.addPlace(titleValue));
+    dispatch(placesActions.addPlace(titleValue, image));
     props.navigation.goBack();
   };
 
@@ -34,7 +39,7 @@ function NewPlacesScreen(props) {
           onChangeText={handleInputChange}
           value={titleValue}
         />
-        <ImageSelector />
+        <ImageSelector takenImage={handleSelectedImage} />
         <Button title="Add" onPress={savePlace} />
       </View>
     </ScrollView>
