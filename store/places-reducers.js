@@ -14,6 +14,10 @@ export default (state = initialState, action) => {
         action.placeData.image
       );
 
+      return {
+        places: state.places.concat(newPlace),
+      };
+
     case GET_PLACES:
       return {
         places: action.places.map(
