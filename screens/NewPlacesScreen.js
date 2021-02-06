@@ -8,6 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import ImageSelector from '../components/ImageSelector';
+import LocationSelector from '../components/LocationSelector';
 import { useDispatch } from 'react-redux';
 import * as placesActions from '../store/places-actions';
 
@@ -40,6 +41,7 @@ function NewPlacesScreen(props) {
           value={titleValue}
         />
         <ImageSelector takenImage={handleSelectedImage} />
+        <LocationSelector />
         <Button title="Add" onPress={savePlace} />
       </View>
     </ScrollView>
