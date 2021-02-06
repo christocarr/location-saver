@@ -36,7 +36,6 @@ export const getPlaces = () => {
   return async (dispatch) => {
     try {
       const result = await fetchPlaces();
-      console.log(result);
       dispatch({ type: GET_PLACES, places: result.rows._array });
     } catch (err) {
       console.error(err);
