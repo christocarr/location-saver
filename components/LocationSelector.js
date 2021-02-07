@@ -10,8 +10,7 @@ import {
 import Colors from '../constants/Colors';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
-import { readAsStringAsync } from 'expo-file-system';
-import { set } from 'react-native-reanimated';
+import MapPreview from './MapPreview';
 
 function LocationSelector(props) {
   const [location, setLocation] = useState();
@@ -50,20 +49,31 @@ function LocationSelector(props) {
   };
 
   return (
-    <View>
-      <View>
+    <View style={styles.locationSelector}>
+      <MapPreview style={styles.MapPreviewContainer} location={location}>
         {isLoading ? (
           <ActivityIndicator size="large" color={Colors.primary} />
         ) : (
           <Text>No Location selected</Text>
         )}
-      </View>
+      </MapPreview>
 
       <Button title="Get location" onPress={getLocation} />
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  locationSelector: {
+    marginBottom: 10,
+  },
+  MapPreviewContainer: {
+    width: '100%',
+    height: 200,
+    borderColor: '#ccc',
+    borderWidth: 4,
+    marginBottom: 10,
+  },
+});
 
 export default LocationSelector;

@@ -60,7 +60,9 @@ function ImageSelector(props) {
 }
 
 const styles = StyleSheet.create({
-  imagePicker: {},
+  imagePicker: {
+    marginBottom: 30,
+  },
   imageContainer: {
     backgroundColor: 'grey',
     maxWidth: '100%',
