@@ -6,7 +6,7 @@ export const GET_PLACES = 'GET_PLACES';
 export const addPlace = (title, image, location) => {
   return async (dispatch) => {
     const response = await fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=AIzaSyAbeC1V2VB_2zwOEyScz9qGCjzRA7sXnuk`
+      `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.lat},${location.lng}&key=apiKEY`
     );
     if (!response.ok) {
       throw new Error('Something is wrong');
