@@ -41,7 +41,7 @@ function NewPlacesScreen(props) {
           value={titleValue}
         />
         <ImageSelector takenImage={handleSelectedImage} />
-        <LocationSelector navigation={props.navigation} />
+        <LocationSelector navigation={props.navigation} route={props.route} />
         <Button title="Add" onPress={savePlace} />
       </View>
     </ScrollView>

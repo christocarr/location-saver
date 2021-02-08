@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { tyleSheet } from 'react-native';
+import { View, Button, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 
 function MapScreen(props) {
@@ -32,14 +32,27 @@ function MapScreen(props) {
     };
   }
 
+  const handleSave = () => {
+    if (!selectedLocation) {
+      return;
+    }
+    props.navigation.navigate('New Places Screen', {
+      customLocation: selectedLocation,
+    });
+  };
+
   return (
-    <MapView
-      style={styles.map}
-      region={mapRegion}
-      onPress={handleMarkerLocation}
-    >
-      <Marker coordinate={markerCoords} />
-    </MapView>
+    <View>
+      <Button title="Save" onPress={handleSave} />
+
+      <MapView
+        style={styles.map}
+        region={mapRegion}
+        onPress={handleMarkerLocation}
+      >
+        <Marker coordinate={markerCoords} />
+      </MapView>
+    </View>
   );
 }
 
