@@ -11,6 +11,7 @@ import Colors from '../constants/Colors';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import MapPreview from './MapPreview';
+import { NavigationContainer } from '@react-navigation/native';
 
 function LocationSelector(props) {
   const [location, setLocation] = useState();
@@ -48,6 +49,12 @@ function LocationSelector(props) {
     setIsLoading(false);
   };
 
+  const handleCustomLocation = () => {
+    console.log(props);
+    // props.navigate('Map Screen');
+    props.navigation.navigate('Map Screen');
+  };
+
   return (
     <View style={styles.locationSelector}>
       <MapPreview style={styles.MapPreviewContainer} location={location}>
@@ -57,8 +64,10 @@ function LocationSelector(props) {
           <Text>No Location selected</Text>
         )}
       </MapPreview>
-
-      <Button title="Get location" onPress={getLocation} />
+      <View style={styles.buttonContainer}>
+        <Button title="Get location" onPress={getLocation} />
+        <Button title="Custom location" onPress={handleCustomLocation} />
+      </View>
     </View>
   );
 }
@@ -73,6 +82,11 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderWidth: 4,
     marginBottom: 10,
+  },
+  buttonContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
 
