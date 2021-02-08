@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   ScrollView,
   View,
@@ -15,6 +15,7 @@ import * as placesActions from '../store/places-actions';
 function NewPlacesScreen(props) {
   const [titleValue, setTitleValue] = useState('');
   const [image, setImage] = useState(null);
+  const [selectedLocation, setSelectedLocation] = useState();
 
   const handleInputChange = (text) => {
     setTitleValue(text);
@@ -24,8 +25,12 @@ function NewPlacesScreen(props) {
     setImage(selectedImage);
   };
 
+  const handleSelectedLocation = useCallback((location) => {
+    setSelectedLocation(location);
+  }, []);
+
   const savePlace = () => {
-    dispatch(placesActions.addPlace(titleValue, image));
+    dispatch(placesActions.addPlace(titleValue, image, selectedLocation));
     props.navigation.goBack();
   };
 
@@ -41,7 +46,11 @@ function NewPlacesScreen(props) {
           value={titleValue}
         />
         <ImageSelector takenImage={handleSelectedImage} />
-        <LocationSelector navigation={props.navigation} route={props.route} />
+        <LocationSelector
+          navigation={props.navigation}
+          route={props.route}
+          handleSelectedLocation={handleSelectedLocation}
+        />
         <Button title="Add" onPress={savePlace} />
       </View>
     </ScrollView>

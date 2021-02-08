@@ -21,8 +21,9 @@ function LocationSelector(props) {
       return;
     } else {
       setLocation(props.route.params.customLocation);
+      props.handleSelectedLocation(props.route.params.customLocation);
     }
-  }, [props.route.params]);
+  }, [props.route.params, props.handleSelectedLocation]);
 
   const verifyPermission = async () => {
     const result = await Permissions.askAsync(Permissions.LOCATION);
@@ -46,6 +47,10 @@ function LocationSelector(props) {
         timeInterval: 5000,
       });
       setLocation({
+        lat: result.coords.latitude,
+        lng: result.coords.longitude,
+      });
+      props.handleSelectedLocation({
         lat: result.coords.latitude,
         lng: result.coords.longitude,
       });
