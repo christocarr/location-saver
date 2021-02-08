@@ -1,15 +1,46 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import MapView from 'react-native-maps';
+import React, { useState } from 'react';
+import { tyleSheet } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 
 function MapScreen(props) {
+  const [selectedLocation, setSelectedLocation] = useState();
+
   const mapRegion = {
     latitude: 37.78,
     longitude: -122.48,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
-  return <MapView style={styles.map} region={mapRegion} />;
+
+  const handleMarkerLocation = (ev) => {
+    setSelectedLocation({
+      lat: ev.nativeEvent.coordinate.latitude,
+      lng: ev.nativeEvent.coordinate.longitude,
+    });
+  };
+
+  let markerCoords;
+  if (selectedLocation) {
+    markerCoords = {
+      latitude: selectedLocation.lat,
+      longitude: selectedLocation.lng,
+    };
+  } else {
+    markerCoords = {
+      latitude: 0,
+      longitude: 0,
+    };
+  }
+
+  return (
+    <MapView
+      style={styles.map}
+      region={mapRegion}
+      onPress={handleMarkerLocation}
+    >
+      <Marker coordinate={markerCoords} />
+    </MapView>
+  );
 }
 
 const styles = StyleSheet.create({

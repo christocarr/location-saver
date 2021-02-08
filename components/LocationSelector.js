@@ -11,7 +11,6 @@ import Colors from '../constants/Colors';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import MapPreview from './MapPreview';
-import { NavigationContainer } from '@react-navigation/native';
 
 function LocationSelector(props) {
   const [location, setLocation] = useState();
@@ -50,8 +49,6 @@ function LocationSelector(props) {
   };
 
   const handleCustomLocation = () => {
-    console.log(props);
-    // props.navigate('Map Screen');
     props.navigation.navigate('Map Screen');
   };
 
